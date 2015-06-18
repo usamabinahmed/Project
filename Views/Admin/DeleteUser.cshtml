@@ -1,0 +1,35 @@
+﻿@model FinalProject.Models.User
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}">
+<div class="row">
+
+    <div class="col-md-3">
+        <form action="/Admin/showUsers">
+            <button class="form-control btn btn-danger" type="submit">USERS</button>
+        </form>
+        <form action="/Admin/ShowSongs">
+            <button class="form-control btn btn-danger" type="submit">SONGS</button>
+        </form>
+        <form action="/Admin/ShowDashBoard">
+            <button class="form-control btn btn-danger" type="submit">Dash Board</button>
+        </form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+      
+    </div>
+    <div>
+        <form action="/Admin/Delete" method="post">
+            @Html.TextBoxFor(x => x.Id, new { @class = "form-control" });
+
+            <button class="form-control btn btn-danger" type="submit">Delete </button>
+        </form>
+    </div>
+</div>

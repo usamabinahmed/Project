@@ -1,0 +1,157 @@
+﻿@model FinalProject.Models.User
+<script src="~/Content/jquery-2.1.4.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<style>
+    .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin: 0px;
+    }
+</style>
+<script type="text/javascript">
+
+
+
+
+    $(document).ready(function () {
+
+
+
+        $("#Name").click(function () { $("#err").hide("250"); });
+        // $("#end").click(f);
+        $("#register").validate({
+            errorElement: 'form',
+            rules: {
+                "Name": {
+                    required: true
+                },
+                "Password": {
+                    required: true,
+                    minlength: 5
+                },
+                "confirm": {
+                    required: true,
+                    equalTo: "#Password"
+                },
+                "Email": {
+                    required: true,
+                },
+
+            },
+            messages: {
+                Name: {
+                    required: "*Required"
+                },
+                Password: {
+                    required: "*Required",
+                    minlength: "Password must be atleast 5 characters long"
+                },
+                confirm: {
+                    required: "*Required",
+                    equalTo: "Password does not Match"
+                },
+                Email: {
+                    required: "*Required",
+                },
+
+            }
+
+
+        });
+        $('#check').click(function () {
+
+            var v = $("#user").val();
+            $.getJSON("/SignUp/onCheck?username=" + v, function (d) {
+                if (d) {
+                    $('#checkingDiv').empty();
+                    $('#checkingDiv').removeClass("alert alert-success");
+
+                    $('#checkingDiv').addClass("alert alert-danger");
+                    $('#checkingDiv').append("<p><strong>Warning!<strong> Username already exists</p>");
+                } else {
+                    $('#checkingDiv').empty();
+                    $('#checkingDiv').removeClass("alert alert-danger");
+
+                    $('#checkingDiv').addClass("alert alert-success");
+                    $('#checkingDiv').append("<p><strong>Great!<strong> Username is available.</p>");
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+<form action="/SignUp/Save" method="post" id="register" name="register">
+    <div>
+        <div id="checkingDiv">
+            @{
+                if (Session["checkUser"] == "true")
+                {
+
+                    <p class="alert alert-danger">Username Already Exists!</p> 
+                }
+            }
+        </div>
+        <div class="form-group has-error has-feedback">
+            <h4 class="text-danger">
+                User Name:
+            </h4>
+            <div id="div1" class="col-sm-3">
+
+                @Html.TextBoxFor(y => y.Name, new { name = "user", id = "user", @class = "form-control", @placeholder = "Name" })
+
+                <button class="btn btn-danger" name="checkUser" id="check">Check!</button>
+
+                <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="form-group has-error has-feedback">
+            <h4 class="text-danger">
+                Email:
+            </h4>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(y => y.Email, new { @class = "form-control", @placeholder = "abc@xyz.com", @type = "email" })
+
+                <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="form-group has-error has-feedback">
+            <h4 class="text-danger">
+                Password:
+            </h4>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(y => y.Password, new { @class = "form-control", @placeholder = "*****", @type = "password" })
+
+                <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="form-group has-error has-feedback">
+            <h4 class="text-danger">
+                Confirm Password:
+            </h4>
+            <div class="col-sm-3">
+                <input type="password" class="form-control" id="confirm" placeholder="****" name="confirm">
+                <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+            </div>
+        </div>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-primary btn-danger btn-group-sm" name="end" id="end">Sign UP</button>
+    </div>
+</form>

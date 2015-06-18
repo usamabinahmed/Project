@@ -1,0 +1,74 @@
+﻿@model  FinalProject.Controllers.ModelClass
+@{
+    ViewBag.Title = "play";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#b1").click(function () {
+            if(@Session.Count==0){
+
+                alert("Cannot Like with out Login/SignUp")
+            }
+            else{
+
+            
+                var value = $('#lik').val();
+                $("#lik").text((parseInt($("#lik").text()) + 1).toString());
+
+                $.getJSON("/showcatogry/Likes?id="+@Model.u.Id);
+            }
+        });
+
+        $("#cmnt").click(function () {
+            if (@Session.Count==0) {
+                alert("Login to Comment this Video..!");
+            }
+            if(@Session.Count>=1){
+                var x=$("#txt").val();
+                if(x.length>0){
+                    $.getJSON("/showcatogry/Comment?x="+x+"&id="+@Model.u.Id,function(d){
+                        var s = "<label style=\"background-color:rgba(178, 112, 175, 0.38)\">"+@Session["UserName"]+":</label><br/>";
+                        s=s+"<label style=\"word-wrap:break-word;font-size:x-small\">"+d.Comments+"</label>";
+                        s=s+" <label style=\"word-wrap:break-word;font-size:x-small; color:#ff0000;margin-left:82%\">"+"Now"+"</label> <hr />";
+                        $("#div2").append(s);
+                    });
+                }
+            }
+        });
+
+
+    });
+</script>
+
+
+<div>
+        <audio controls>
+            <source src="@Model.u.path" type="audio/mp3">
+        </audio>
+        <button class="btn btn-lg" id="b1"><span id ="lik"class="glyphicon glyphicon-thumbs-up" style="color:blue">@Model.u.likes</span></button>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    
+    </div>
+<div id="div2" style="background-color: #db0a0a">
+    @foreach (var x in Model.c)
+    {
+        <label style="word-wrap:break-word;font-size:x-small;color:#db0a0a;font-family:Algerian;"> </label>
+        <hr />
+        <label style="word-wrap:break-word;font-size:larger;font-family:Algerian">@x.Comments</label>
+    }
+</div>
+@if(Session.Count>0)
+{    <div>
+        <textarea style=" display:block; width:100%;resize:none" id="txt"></textarea>
+        <button id="cmnt" class="btn-danger pull-right">Comment</button>
+    </div>
+}
+
+
+    @*<h2>play</h2>
+
+        <audio src="@Model.path" ></audio>*@

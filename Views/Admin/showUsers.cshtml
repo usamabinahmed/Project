@@ -1,0 +1,72 @@
+﻿@model List<FinalProject.Models.User>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="row">
+
+    <div class="col-md-3">
+        <form action="/Admin/showUsers">
+            <button class="form-control btn btn-danger" type="submit">USERS</button>
+        </form>
+        <form action="/Admin/ShowSongs">
+            <button class="form-control btn btn-danger" type="submit">SONGS</button>
+        </form>
+        <form action="/Admin/DashBoard">
+            <button class="form-control btn btn-danger" type="submit">Dash Board</button>
+        </form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <form action="/Admin/DeleteUser">
+            <button class="form-control btn btn-danger" type="submit">Delete User</button>
+        </form>
+    </div>
+        <div class="col-md-6">
+            <table class="table   table-responsive table-hover" >
+                <tr>
+                    <th width="10%">
+                        User Id
+                    </th>
+
+                    <th width="30%">
+                        User Name
+                    </th>
+                    <th width="50%">
+                        User Email
+                    </th>
+                    <th width="20%">
+                        User Password
+                    </th>
+                </tr>
+                @foreach (var z in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @z.Id
+                        </td>
+                        <td>
+                            @z.Name
+                        </td>
+                        <td>
+                            @z.Email
+                        </td>
+                        <td>
+                            @z.Password
+                        </td>
+                        <td>
+                            <a href="/Admin/Delete/@z.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+
+</div>

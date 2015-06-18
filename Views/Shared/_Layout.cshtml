@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            $("#Search").click(function () {
+                var n = $("#name").val();
+                $("#bodyDiv").empty();
+                $("#bodyDiv").empty();
+                $("#bodyDiv").addClass("alert alert-success");
+                $.getJSON("/Home/Search?q=" + n, function (data) {
+                    //alert("here");
+                    $.each(data, function (i, item) {
+                        //alert('Id = ' + item.Id + " Name = " + item.Name);
+                        $("#bodyDiv").append("<br/>  <a href=\"/Showcatogry/play/" + item.Id + "\"><image width=\"250\"  height=\"250\" src=" + item.Pic + "/>" + item.Name + "</a>");
+                        //alert('Id = ' + item.Id + " Name = " + item.Name);
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body style="background-color:black">
+    <header>
+        <nav class="navbar nav-pills  " role="navigation">
+            <div>
+                <ul class="nav navbar-nav ">
+                    <li><a class="navbar-brand " href="#"><img src="~/Content/images/Icon.png" height="40" width="120" class="nav-tabs-justified" /></a></li>
+                    <li><a href=" /Home/Index/" class=" btn btn-danger" style="color:black ;font-family:Elephant">Home</a></li>
+                    <li><a href=" /catogory/Catogory/" class="btn btn-danger" style="color:black ;font-family:Elephant">Catogries</a></li>
+                    <li><a href=" /AbputUs/AboutUs/" class=" btn btn-danger" style="color:black ;font-family:Elephant">About Us</a></li>
+                    <li><a href=" /ContactUs/Contact" class=" btn btn-danger" style="color:black ;font-family:Elephant">Contact Us</a></li>
+                    <li>
+                        @* <form class="navbar-form" role="search" >
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search"name="name" id="name"/>
+                                </div>
+                                <button type="submit" class="btn btn-danger" style="color:black ;font-family:Elephant" id="Search" name="Search" >Search</button>
+                            </form>*@
+                        <div class="input-group  form-group-lg">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Audio Name" />
+                            <span id="Search" class="input-group-addon btn-danger glyphicon glyphicon-search"></span>
+                        </div>
+
+                      
+                    </li>
+
+                    <li class="navbar-rig pull-right">
+                        <a href="/SignUp/SignUp/" class="btn btn-danger" style="color:black ;font-family:Elephant">Sign UP</a>
+                    </li>
+                    @if (Session.Count == 0)
+                    {
+                        <li class=" navbar-right pull-right">
+                            <a href=" /SignIn/SignIn/" class="btn btn-danger" style="color:black ;font-family:Elephant">Sign In</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class=" navbar-right pull-right">
+                            <a href=" /SignIn/Logout/" class="btn btn-danger" style="color:black ;font-family:Elephant">Log out</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+
+
+            <div>
+                <ul id="nav" class="nav navbar-nav pull-right">
+
+                    <li id="searchicon" class="btn-danger"><a href="#"><span class="glyphicon glyphicon-user"></span>@Session["UserName"]</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="row">
+
+        <div class="col-md-2">
+
+            <img src="~/Content/images/no1.jpg" width=" 200" height="200" />
+            <br />
+            <img src="~/Content/images/no3.jpg" width=" 200" height="200" />
+            <br />
+
+            <img src="~/Content/images/no4.jpg" width=" 200" height="200" />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+            <img src="~/Content/images/no5.jpg" width=" 200" height="200" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <img src="~/Content/images/no6.jpg" width=" 200" height="200" />
+        </div>
+
+        <div id="body">
+            <div class="col-md-8" id="bodyDiv">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+             aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            <a href="/Index/Home/" style="font-style:italic ;font-size:medium">Home</a>
+            <a href="/catogory/Catogory/" style="font-style:italic ;font-size:medium">Catogries</a>
+            <a href="AbputUs/AboutUs/" style="font-style:italic ;font-size:medium">AboutUs</a>
+            <a href="/Contact/ContactUs/" style="font-style:italic ;font-size:medium">Contact Us</a>
+            <a href="/SignIn/SignIn/" style="font-style:italic ;font-size:medium">Sign In</a>
+            <a href="/SignUp/SignUp/" style="font-style:italic ;font-size:medium">Sign Up</a>
+
+            <label class="pull-right " style="font-size:large;background-color:grey">All Rights Reserved</label>
+
+
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿@model List<FinalProject.Models.UpLoad>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="row">
+
+        <div class="col-md-3">
+            <form action="/Admin/showUsers">
+                <button class="form-control btn btn-danger" type="submit">USERS</button>
+            </form>
+            <form action="/Admin/ShowSongs">
+                <button class="form-control btn btn-danger" type="submit">SONGS</button>
+            </form>
+            <form action="/Admin/ShowDashBoard">
+                <button class="form-control btn btn-danger" type="submit">Dash Board</button>
+            </form>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <form action="/Admin/DeleteSong">
+                <button class="form-control btn btn-danger" type="submit">Delete Song</button>
+            </form>
+        </div>
+
+        <table>
+            <tr>
+                <th width="10%">
+                    Song Id
+                </th>
+
+                <th width="10%">
+                    Song Name
+                </th>
+                <th width="15%">
+                    Song Catogory
+                </th>
+                <th width="30%">
+                    Song path
+                </th>
+                <th width="40%">
+                    Picture Path
+                </th>
+            </tr>
+            @foreach (var z in Model)
+            {
+                <tr>
+
+                    <td>
+                        @z.Id
+                    </td>
+                    <td>
+                        @z.Name
+                    </td>
+                    <td>
+                        @z.Catogory
+                    </td>
+                    <td>
+                        @z.path
+                    </td>
+                    <td>
+                        @z.Pic
+                    </td>
+
+                </tr>
+            }
+        </table>
+
+    </div>
+
+

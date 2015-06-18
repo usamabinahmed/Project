@@ -1,0 +1,13 @@
+﻿@model List<FinalProject.Models.UpLoad>
+@{
+    Layout = null;
+}
+<div style="color:white;">
+    <p>Hello there!</p>
+
+    @foreach (var song in Model)
+    {
+        <h3> @song.Name </h3>
+        <p>This is another one!</p>
+    }
+</div>

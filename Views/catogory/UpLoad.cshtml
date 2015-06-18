@@ -1,0 +1,26 @@
+﻿
+@model FinalProject.Models.UpLoad
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<form method="post" action="UpLoad1" enctype="multipart/form-data">
+    <label style="color:red; font-family:Algerian;font-size:large">Name of Song :</label>
+    @Html.TextAreaFor(m => m.Name, new { @class="form-control",style="width:400px ;height:40px " ,@placeholder="Name of song"   }) 
+    <br />
+    <label style="color:red; font-family:Algerian;font-size:large">Catogory :</label>
+    @Html.TextAreaFor(m => m.Catogory, new { @class = "form-control", style = "width:400px ;height:40px ", @placeholder = "Catogory" })
+    <br />
+    <label style="color:red; font-family:Algerian;font-size:large">Add Picture:</label>
+    <br />
+    <input type="file" class="btn btn-danger" name="path" placeholder="PICTURE">
+   
+    <br />
+    <br />
+    <input type="file" class="btn btn-danger" name="file">
+    <button type="submit"  class="active pull-right  btn btn-danger btn btn-group-lg" style="font-family:Algerian" > UPLOAD A SONG</button>
+     
+  
+    <!--<span class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+
+
+</form>

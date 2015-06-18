@@ -1,0 +1,39 @@
+﻿@model List<FinalProject.Models.UpLoad>
+@{
+    ViewBag.Title = "findData";
+}
+<script>
+    $(document).ready(function () {
+    $("#b1").click(function () {
+        $("#s1").text((parseInt($("#s1").text()) + 1).toString());
+        alert("here");
+    });
+    });
+</script>
+
+    @foreach (var x in Model)
+    {
+        <div class="row">
+            <div class="img-thumbnail col-lg-3">
+                <a href="play/@x.Id">
+
+                    <img style="height:200px; width:200px;" src="@x.Pic" />
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <label style="color:red">@x.Name</label>
+                <br />
+                <label style="color:red">@x.Catogory</label>
+                <br />
+                
+                    <button id="b1"><img src="~/Content/images/Facebook_like_thumb.png" id="b1" height="30" width="30" /></button>
+                    <label id="s1">@x.likes</label>
+                
+            </div>
+        </div>
+   
+
+        <hr />
+    }
+
+
